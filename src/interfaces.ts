@@ -11,3 +11,5 @@ export interface Player extends BasePlayer {
 }
 
 export type Position = "Forward" | "Midfielder" | "Defender" | "Goalkeeper"
+
+export type ToastType = "info" | "success" | "error"
