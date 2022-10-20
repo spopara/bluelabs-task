@@ -1,14 +1,16 @@
+<nav>
+	<h1>Player List</h1>
+</nav>
+
 <style>
 	nav {
-		border-bottom: 1px solid #459ed6;
+		color: #fff;
+        background: #123053;
 		font-weight: 300;
 		padding: 1rem;
 	}
     h1 {
        margin: 0;
+	   white-space: nowrap;
     }
 </style>
-
-<nav>
-	<h1>Player List</h1>
-</nav>
