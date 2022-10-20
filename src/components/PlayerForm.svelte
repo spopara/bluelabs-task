@@ -32,6 +32,7 @@
         required
         id="name"
         name="name"
+        placeholder="input name"
         on:change="{(e) => {
             name = e.target.value
             onUpdate({ ...data, name })

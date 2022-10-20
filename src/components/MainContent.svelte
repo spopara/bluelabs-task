@@ -91,7 +91,7 @@
 
 <section>
     <menu>
-        <Button id="add-player" on:click="{() => (showEditor = true)}">
+        <Button on:click="{() => (showEditor = true)}">
             <span>Add</span>
         </Button>
     </menu>
@@ -110,18 +110,20 @@
     </ul>
 </section>
 
-<PlayerEditor
-    show="{showEditor}"
-    onClose="{closeEditor}"
-    submitPlayer="{(player) => {
-        if (selectedPlayer) {
-            return updatePlayer(player)
-        } else {
-            return addPlayer(player)
-        }
-    }}"
-    player="{selectedPlayer || getDefaultPlayer()}"
-/>
+{#if showEditor}
+    <PlayerEditor
+        show="{showEditor}"
+        onClose="{closeEditor}"
+        submitPlayer="{(player) => {
+            if (selectedPlayer) {
+                return updatePlayer(player)
+            } else {
+                return addPlayer(player)
+            }
+        }}"
+        player="{selectedPlayer || getDefaultPlayer()}"
+    />
+{/if}
 
 <style lang="scss">
     menu {

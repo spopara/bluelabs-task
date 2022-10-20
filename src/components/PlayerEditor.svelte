@@ -15,7 +15,12 @@
     <h2 id="form-dialog-title">
         {player.name ? `Edit ${player.name}` : "New player"}
     </h2>
-    <div class="player-editor-form">
+    <form
+        class="player-editor-form"
+        on:submit|preventDefault="{() => {
+            submitPlayer(editingPlayer)
+        }}"
+    >
         <PlayerForm
             id="{player.id}"
             name="{player.name}"
@@ -25,26 +30,20 @@
             goals="{player.goals}"
             onUpdate="{(data) => (editingPlayer = data)}"
         />
-    </div>
 
-    <div>
-        <Button
-            on:click="{() => {
-                submitPlayer(editingPlayer)
-            }}"
-        >
-            Submit
-        </Button>
+        <div>
+            <Button type="submit">Submit</Button>
 
-        <Button
-            on:click="{(e) => {
-                e.preventDefault()
-                onClose()
-            }}"
-        >
-            Close
-        </Button>
-    </div>
+            <Button
+                on:click="{(e) => {
+                    e.preventDefault()
+                    onClose()
+                }}"
+            >
+                Close
+            </Button>
+        </div>
+    </form>
 </dialog>
 
 <style lang="scss">

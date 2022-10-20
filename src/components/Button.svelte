@@ -1,4 +1,8 @@
-<button on:click>
+<script>
+    export let type = "button"
+</script>
+
+<button on:click type="{type}">
     <slot />
 </button>
 
