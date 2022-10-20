@@ -35,7 +35,7 @@
     }
 </script>
 
-<div>
+<section>
     <ul>
         {#each players as player (player.id)}
             <PlayerCard
@@ -48,7 +48,7 @@
     <Button id="add-player" on:click="{() => (isEditing = !isEditing)}">
         <span>Add</span>
     </Button>
-</div>
+</section>
 
 {#if isEditing || !!selectedPlayer}
     <PlayerEditor
@@ -66,3 +66,18 @@
         player="{selectedPlayer || getDefaultPlayer()}"
     />
 {/if}
+
+<style lang="scss">
+    section {
+        width: 100%;
+        ul {
+            padding: 0;
+            margin: 0 0 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            list-style: none;
+        }
+    }
+</style>

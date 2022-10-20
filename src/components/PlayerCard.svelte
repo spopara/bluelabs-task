@@ -18,7 +18,7 @@
 
 <li class="player-card">
     <div class="player-card-info">
-        <p class="player-card-title">{player.name}</p>
+        <p class="player-card-title" title="{player.name}">{player.name}</p>
         <p class="player-card-subtitle">{player.position}</p>
 
         <dl class="player-card-statistics">
@@ -56,6 +56,7 @@
         margin: $cardMargin;
         width: 335px;
         height: 500px;
+        flex-shrink: 0;
         color: #fff;
         background: #2b6298;
         background: radial-gradient(circle, #2b6298 0%, #123053 100%);
@@ -63,11 +64,16 @@
         overflow: hidden;
 
         .player-card-info {
+            box-sizing: border-box;
             padding: 20px;
+            height: 206px;
 
             .player-card-title {
                 margin: 0 auto;
                 font-size: 2rem;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
 
             .player-card-subtitle {

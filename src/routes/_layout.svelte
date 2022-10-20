@@ -5,9 +5,9 @@
 <style>
 	main {
 		position: relative;
-		max-width: 56rem;
+		max-width: 1280px;
+		min-width: 375px;
 		background-color: white;
-		padding: 2rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}
