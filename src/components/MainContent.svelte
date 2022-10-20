@@ -11,8 +11,7 @@
     let isEditing = false
 
     const deletePlayer = (id: string) => {
-        // TODO: add `DELETE` api request (endpoint: `/players`, accepted payload: player id)
-        throw new Error("Delete request not implemented")
+        players = players.filter((player) => player.id !== id)
     }
 
     const updatePlayer = (player: Player) => {
@@ -55,7 +54,7 @@
 
 <!-- {#if isEditing || !!selectedPlayer} -->
 <PlayerEditor
-    show={isEditing || !!selectedPlayer}
+    show="{isEditing || !!selectedPlayer}"
     onClose="{() => {
         isEditing = false
         selectedPlayer = undefined
