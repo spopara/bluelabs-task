@@ -1,8 +1,9 @@
 <script lang="ts">
     import { nanoid } from "nanoid"
+    import PlayerEditor from "../components/PlayerEditor.svelte"
     import type { Player } from "../interfaces"
     import { toPosition } from "../utils"
-    import PlayerEditor from "../components/PlayerEditor.svelte"
+    import PlayerCard from "./PlayerCard.svelte"
 
     export let players: Array<Player> = []
     let selectedPlayer: Player | undefined
@@ -33,54 +34,34 @@
     }
 </script>
 
-<style lang="scss">
-    li {
-        margin-bottom: 1rem;
-        padding-bottom: 1rem;
-        border-bottom: 1px solid #eee;
-    }
-    img {
-        max-width: 4rem;
-    }
-</style>
-
 <div>
     <ul>
         {#each players as player (player.id)}
-            <li>
-                <img
-                    src={player.picture}
-                    alt={`of ${player.name}`}
-                    title="Image title"
-                />
-                <p>{player.name}</p>
-                <p>{player.position}</p>
-                <p>{player.score}</p>
-                <p>{player.goals}</p>
-                <div>
-                    <button on:click={() => deletePlayer(player.id)}>Delete</button>
-                    <button on:click={() => selectedPlayer = player}>Edit</button>
-                </div>
-            </li>
+            <PlayerCard
+                player="{player}"
+                on:delete-player="{(e) => deletePlayer(e.detail)}"
+                on:select-player="{(e) => (selectedPlayer = e.detail)}"
+            />
         {/each}
     </ul>
-    <button id="add-player" on:click={() => isEditing = !isEditing}>
+    <button id="add-player" on:click="{() => (isEditing = !isEditing)}">
         <span>Add</span>
     </button>
 </div>
 
 {#if isEditing || !!selectedPlayer}
-    <PlayerEditor onClose={() => {
-                        isEditing = false
-                        selectedPlayer = undefined
-                    }}
-                  submitPlayer={player => {
-                                    if (selectedPlayer) {
-                                        return updatePlayer(player)
-                                    } else {
-                                        return addPlayer(player)
-                                    }
-                                }}
-                  player={selectedPlayer || getDefaultPlayer()}
+    <PlayerEditor
+        onClose="{() => {
+            isEditing = false
+            selectedPlayer = undefined
+        }}"
+        submitPlayer="{(player) => {
+            if (selectedPlayer) {
+                return updatePlayer(player)
+            } else {
+                return addPlayer(player)
+            }
+        }}"
+        player="{selectedPlayer || getDefaultPlayer()}"
     />
 {/if}
