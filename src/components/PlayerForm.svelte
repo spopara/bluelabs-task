@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { onMount } from "svelte"
     import type { Player, Position } from "../interfaces"
     import { readFileAsBase64, toPosition } from "../utils"
 
@@ -18,6 +19,10 @@
         score,
         goals,
     }
+
+    onMount(() => {
+        onUpdate({ ...data })
+    })
 </script>
 
 <div class="player-form">

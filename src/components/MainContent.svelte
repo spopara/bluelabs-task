@@ -1,12 +1,13 @@
 <script lang="ts">
     import { nanoid } from "nanoid"
     import PlayerEditor from "../components/PlayerEditor.svelte"
-    import type { Player } from "../interfaces"
+    import type { Player, ToastType } from "../interfaces"
     import { toPosition } from "../utils"
     import Button from "./Button.svelte"
     import PlayerCard from "./PlayerCard.svelte"
 
     export let players: Array<Player> = []
+    export let showToast: (message: string, type: ToastType) => void
     let selectedPlayer: Player | undefined
     let showEditor = false
 
@@ -16,10 +17,15 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id }),
         })
+            .then((response) => {
+                if (response.ok) return response
+                else throw new Error("Could not delete player.")
+            })
             .then(() => {
                 players = players.filter((p) => p.id !== id)
+                handleServerSuccess("Player deleted successfully.")
             })
-            .catch((error) => console.log(error))
+            .catch((error) => handleServerError(error))
     }
 
     const updatePlayer = (player: Player) => {
@@ -29,10 +35,15 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(player),
         })
+            .then((response) => {
+                if (response.ok) return response
+                else throw new Error("Could not update player.")
+            })
             .then(() => {
                 players = players.map((p) => (p.id === player.id ? player : p))
+                handleServerSuccess("Player updated successfully.")
             })
-            .catch((error) => console.log(error))
+            .catch((error) => handleServerError(error))
     }
 
     const addPlayer = (player: Player) => {
@@ -42,10 +53,24 @@
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(player),
         })
+            .then((response) => {
+                if (response.ok) return response
+                else throw new Error("Could not add player.")
+            })
             .then(() => {
                 players = [...players, player]
+                handleServerSuccess("Player added successfully.")
             })
-            .catch((error) => console.log(error))
+            .catch((error) => handleServerError(error))
+    }
+
+    const handleServerSuccess = (message: string): void => {
+        showToast(message, "success")
+    }
+
+    const handleServerError = (error: string): void => {
+        console.error(error)
+        showToast(error, "error")
     }
 
     const closeEditor = () => {
