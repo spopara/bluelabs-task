@@ -8,25 +8,31 @@
 
     export let players: Array<Player> = []
     let selectedPlayer: Player | undefined
-    let isEditing = false
+    let showEditor = false
 
     const deletePlayer = (id: string) => {
         players = players.filter((player) => player.id !== id)
     }
 
     const updatePlayer = (player: Player) => {
-        selectedPlayer = undefined
+        closeEditor()
         players = players.map((p) => (p.id === player.id ? player : p))
     }
 
     const addPlayer = (player: Player) => {
-        // TODO: add `POST` api request (endpoint: `/players`, accepted payload: player)
-        throw new Error("Post request not implemented")
+        closeEditor()
+        players = [player, ...players]
+    }
+
+    const closeEditor = () => {
+        showEditor = false
+        selectedPlayer = undefined
     }
 
     const getDefaultPlayer = () => {
         return {
             id: nanoid(),
+            name: "",
             position: toPosition("Goalkeeper"),
             score: 0,
             goals: 0,
@@ -36,7 +42,7 @@
 
 <section>
     <menu>
-        <Button id="add-player" on:click="{() => (isEditing = true)}">
+        <Button id="add-player" on:click="{() => (showEditor = true)}">
             <span>Add</span>
         </Button>
     </menu>
@@ -48,7 +54,7 @@
                 on:delete-player="{(e) => deletePlayer(e.detail)}"
                 on:edit-player="{(e) => {
                     selectedPlayer = e.detail
-                    isEditing = true
+                    showEditor = true
                 }}"
             />
         {/each}
@@ -56,11 +62,8 @@
 </section>
 
 <PlayerEditor
-    show="{isEditing || !!selectedPlayer}"
-    onClose="{() => {
-        isEditing = false
-        selectedPlayer = undefined
-    }}"
+    show="{showEditor}"
+    onClose="{closeEditor}"
     submitPlayer="{(player) => {
         if (selectedPlayer) {
             return updatePlayer(player)

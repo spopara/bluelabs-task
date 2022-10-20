@@ -1,6 +1,6 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
-    import { fade } from "svelte/transition"
+    import { fade, scale } from "svelte/transition"
     import type { Player } from "../interfaces"
     import Button from "./Button.svelte"
 
@@ -17,7 +17,7 @@
     }
 </script>
 
-<li class="player-card" out:fade>
+<li class="player-card" out:fade in:scale>
     <div class="player-card-info">
         <p class="player-card-title" title="{player.name}">{player.name}</p>
         <p class="player-card-subtitle">{player.position}</p>
