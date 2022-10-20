@@ -11,17 +11,41 @@
     let showEditor = false
 
     const deletePlayer = (id: string) => {
-        players = players.filter((player) => player.id !== id)
+        fetch("/players", {
+            method: "DELETE",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id }),
+        })
+            .then(() => {
+                players = players.filter((p) => p.id !== id)
+            })
+            .catch((error) => console.log(error))
     }
 
     const updatePlayer = (player: Player) => {
         closeEditor()
-        players = players.map((p) => (p.id === player.id ? player : p))
+        fetch("/players", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(player),
+        })
+            .then(() => {
+                players = players.map((p) => (p.id === player.id ? player : p))
+            })
+            .catch((error) => console.log(error))
     }
 
     const addPlayer = (player: Player) => {
         closeEditor()
-        players = [player, ...players]
+        fetch("/players", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(player),
+        })
+            .then(() => {
+                players = [...players, player]
+            })
+            .catch((error) => console.log(error))
     }
 
     const closeEditor = () => {
