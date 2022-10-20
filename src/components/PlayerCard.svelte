@@ -1,6 +1,7 @@
 <script lang="ts">
     import { createEventDispatcher } from "svelte"
     import type { Player } from "../interfaces"
+    import Button from "./Button.svelte"
 
     export let player: Player
 
@@ -40,8 +41,8 @@
     />
 
     <div class="player-card-controls">
-        <button on:click="{() => deletePlayer(player.id)}">Delete</button>
-        <button on:click="{() => selectPlayer(player)}">Edit</button>
+        <Button on:click="{() => deletePlayer(player.id)}">Delete</Button>
+        <Button on:click="{() => selectPlayer(player)}">Edit</Button>
     </div>
 </li>
 

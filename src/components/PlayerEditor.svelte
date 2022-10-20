@@ -25,18 +25,18 @@
     </div>
 
     <div>
-        <button on:click={() => {
+        <Button on:click={() => {
             // TODO: implement the "Add player" functionality
             throw new Error("Missing implementation for Add player")
         }}>
             Submit
-        </button>
+        </Button>
 
-        <button on:click={e => {
+        <Button on:click={e => {
             e.preventDefault()
             onClose()
         }}>
             Close
-        </button>
+        </Button>
     </div>
 </section>

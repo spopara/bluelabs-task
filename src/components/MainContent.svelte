@@ -3,6 +3,7 @@
     import PlayerEditor from "../components/PlayerEditor.svelte"
     import type { Player } from "../interfaces"
     import { toPosition } from "../utils"
+    import Button from "./Button.svelte"
     import PlayerCard from "./PlayerCard.svelte"
 
     export let players: Array<Player> = []
@@ -44,9 +45,9 @@
             />
         {/each}
     </ul>
-    <button id="add-player" on:click="{() => (isEditing = !isEditing)}">
+    <Button id="add-player" on:click="{() => (isEditing = !isEditing)}">
         <span>Add</span>
-    </button>
+    </Button>
 </div>
 
 {#if isEditing || !!selectedPlayer}
