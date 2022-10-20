@@ -5,7 +5,7 @@
 
     export let show = false
     export let onClose: () => void
-    export let submitPlayer: (p: Player) => Promise<any>
+    export let submitPlayer: (p: Player) => void
     export let player: Partial<Player>
 
     let editingPlayer: Player | undefined
@@ -22,6 +22,7 @@
             position="{player.position}"
             picture="{player.picture}"
             score="{player.score}"
+            goals="{player.goals}"
             onUpdate="{(data) => (editingPlayer = data)}"
         />
     </div>
@@ -29,8 +30,7 @@
     <div>
         <Button
             on:click="{() => {
-                // TODO: implement the "Add player" functionality
-                throw new Error('Missing implementation for Add player')
+                submitPlayer(editingPlayer)
             }}"
         >
             Submit

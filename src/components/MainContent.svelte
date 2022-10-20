@@ -15,8 +15,8 @@
     }
 
     const updatePlayer = (player: Player) => {
-        // TODO: add `PUT` api request (endpoint: `/players`, accepted payload: player)
-        throw new Error("Put request not implemented")
+        selectedPlayer = undefined
+        players = players.map((p) => (p.id === player.id ? player : p))
     }
 
     const addPlayer = (player: Player) => {
@@ -36,7 +36,7 @@
 
 <section>
     <menu>
-        <Button id="add-player" on:click="{() => (isEditing = !isEditing)}">
+        <Button id="add-player" on:click="{() => (isEditing = true)}">
             <span>Add</span>
         </Button>
     </menu>
@@ -46,13 +46,15 @@
             <PlayerCard
                 player="{player}"
                 on:delete-player="{(e) => deletePlayer(e.detail)}"
-                on:select-player="{(e) => (selectedPlayer = e.detail)}"
+                on:edit-player="{(e) => {
+                    selectedPlayer = e.detail
+                    isEditing = true
+                }}"
             />
         {/each}
     </ul>
 </section>
 
-<!-- {#if isEditing || !!selectedPlayer} -->
 <PlayerEditor
     show="{isEditing || !!selectedPlayer}"
     onClose="{() => {
@@ -69,7 +71,6 @@
     player="{selectedPlayer || getDefaultPlayer()}"
 />
 
-<!-- {/if} -->
 <style lang="scss">
     menu {
         padding: 10px;

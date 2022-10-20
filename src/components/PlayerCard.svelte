@@ -13,7 +13,7 @@
     }
 
     const selectPlayer = (player: Player) => {
-        dispatchEvent("select-player", player)
+        dispatchEvent("edit-player", player)
     }
 </script>
 
