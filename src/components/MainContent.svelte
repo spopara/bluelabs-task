@@ -53,27 +53,27 @@
     </ul>
 </section>
 
-{#if isEditing || !!selectedPlayer}
-    <PlayerEditor
-        onClose="{() => {
-            isEditing = false
-            selectedPlayer = undefined
-        }}"
-        submitPlayer="{(player) => {
-            if (selectedPlayer) {
-                return updatePlayer(player)
-            } else {
-                return addPlayer(player)
-            }
-        }}"
-        player="{selectedPlayer || getDefaultPlayer()}"
-    />
-{/if}
+<!-- {#if isEditing || !!selectedPlayer} -->
+<PlayerEditor
+    show={isEditing || !!selectedPlayer}
+    onClose="{() => {
+        isEditing = false
+        selectedPlayer = undefined
+    }}"
+    submitPlayer="{(player) => {
+        if (selectedPlayer) {
+            return updatePlayer(player)
+        } else {
+            return addPlayer(player)
+        }
+    }}"
+    player="{selectedPlayer || getDefaultPlayer()}"
+/>
 
+<!-- {/if} -->
 <style lang="scss">
-
     menu {
-        padding: 10px 0;
+        padding: 10px;
         display: flex;
         justify-content: end;
         align-items: center;
