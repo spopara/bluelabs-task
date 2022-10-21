@@ -1,5 +1,6 @@
 <script lang="ts">
     import { nanoid } from "nanoid"
+    import { onMount } from "svelte"
     import PlayerEditor from "../components/PlayerEditor.svelte"
     import type { Player, ToastType } from "../interfaces"
     import { toPosition } from "../utils"
@@ -8,8 +9,23 @@
 
     export let players: Array<Player> = []
     export let showToast: (message: string, type: ToastType) => void
-    let selectedPlayer: Player | undefined
-    let showEditor = false
+    let addDialog: HTMLDialogElement = undefined
+    let addOrUpdatePlayer: (player: Player) => void = undefined
+    const getDefaultPlayer = (): Player => {
+        return {
+            id: nanoid(),
+            name: "",
+            position: toPosition("Goalkeeper"),
+            score: 0,
+            goals: 0,
+            picture: "",
+        }
+    }
+    let selectedPlayer: Player = getDefaultPlayer()
+
+    onMount(() => {
+        addDialog = document.querySelector("#player-editor")
+    })
 
     const deletePlayer = (id: string) => {
         fetch("/players", {
@@ -29,7 +45,7 @@
     }
 
     const updatePlayer = (player: Player) => {
-        closeEditor()
+        handleCloseEditor()
         fetch("/players", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
@@ -47,7 +63,7 @@
     }
 
     const addPlayer = (player: Player) => {
-        closeEditor()
+        handleCloseEditor()
         fetch("/players", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -73,27 +89,27 @@
         showToast(error, "error")
     }
 
-    const closeEditor = () => {
-        showEditor = false
-        selectedPlayer = undefined
+    const handleAddPlayer = () => {
+        addOrUpdatePlayer = addPlayer
+        selectedPlayer = getDefaultPlayer()
+        addDialog?.showModal()
     }
 
-    const getDefaultPlayer = () => {
-        return {
-            id: nanoid(),
-            name: "",
-            position: toPosition("Goalkeeper"),
-            score: 0,
-            goals: 0,
-        }
+    const handleEditPlayer = (player: Player) => {
+        addOrUpdatePlayer = updatePlayer
+        selectedPlayer = player
+        addDialog?.showModal()
+    }
+
+    const handleCloseEditor = () => {
+        addDialog?.close()
+        selectedPlayer = getDefaultPlayer()
     }
 </script>
 
 <section>
     <menu>
-        <Button on:click="{() => (showEditor = true)}">
-            <span>Add</span>
-        </Button>
+        <Button on:click="{() => handleAddPlayer()}">Add</Button>
     </menu>
 
     <ul>
@@ -101,29 +117,19 @@
             <PlayerCard
                 player="{player}"
                 on:delete-player="{(e) => deletePlayer(e.detail)}"
-                on:edit-player="{(e) => {
-                    selectedPlayer = e.detail
-                    showEditor = true
-                }}"
+                on:edit-player="{(e) => handleEditPlayer(e.detail)}"
             />
         {/each}
     </ul>
 </section>
 
-{#if showEditor}
-    <PlayerEditor
-        show="{showEditor}"
-        onClose="{closeEditor}"
-        submitPlayer="{(player) => {
-            if (selectedPlayer) {
-                return updatePlayer(player)
-            } else {
-                return addPlayer(player)
-            }
-        }}"
-        player="{selectedPlayer || getDefaultPlayer()}"
-    />
-{/if}
+<PlayerEditor
+    onClose="{() => {
+        handleCloseEditor()
+    }}"
+    submitPlayer="{addOrUpdatePlayer}"
+    player="{selectedPlayer}"
+/>
 
 <style lang="scss">
     menu {

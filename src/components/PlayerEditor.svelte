@@ -3,15 +3,13 @@
     import type { Player } from "../interfaces"
     import Button from "./Button.svelte"
 
-    export let show = false
     export let onClose: () => void
     export let submitPlayer: (p: Player) => void
     export let player: Partial<Player>
-
-    let editingPlayer: Player | undefined
+    let editingPlayer: Player = player as Player
 </script>
 
-<dialog class="player-editor" aria-modal="true" open="{show}" data-backdrop="static" data-keyboard="false">
+<dialog id="player-editor" class="player-editor" aria-modal="true" data-backdrop="static" data-keyboard="false">
     <h2 id="form-dialog-title">
         {player.name ? `Edit ${player.name}` : "New player"}
     </h2>
@@ -35,8 +33,7 @@
             <Button type="submit">Submit</Button>
 
             <Button
-                on:click="{(e) => {
-                    e.preventDefault()
+                on:click="{() => {
                     onClose()
                 }}"
             >
@@ -49,12 +46,18 @@
 <style lang="scss">
     .player-editor {
         position: absolute;
-        top: 100px;
+        top: 0;
         left: 0;
         right: 0;
         background-color: #fff;
         border-radius: 25px;
         text-align: center;
+
+        &::backdrop {
+            background: #2b6298;
+            background: radial-gradient(circle, #2b6298 0%, #123053 100%);
+            pointer-events: none;
+        }
 
         .player-editor-form {
             position: relative;
