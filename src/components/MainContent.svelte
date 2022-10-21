@@ -74,7 +74,8 @@
                 else throw new Error("Could not add player.")
             })
             .then(() => {
-                players = [...players, player]
+                window.scrollTo(0, 0)
+                players = [player, ...players]
                 handleServerSuccess("Player added successfully.")
             })
             .catch((error) => handleServerError(error))

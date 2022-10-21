@@ -19,7 +19,7 @@ export async function get(req: Request, res: Response): Promise<void> {
 export async function post(req: Request, res: Response): Promise<void> {
     try {
         const { id, position, name, picture, score, goals } = req.body
-        players.push({ id, position, name, picture, score, goals })
+        players.unshift({ id, position, name, picture, score, goals })
         res.end()
     } catch (e) {
         res.writeHead(500, { "Content-Type": "application/json" })
