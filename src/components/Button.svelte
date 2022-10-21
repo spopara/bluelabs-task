@@ -1,8 +1,4 @@
-<script>
-    export let type = "button"
-</script>
-
-<button on:click type="{type}">
+<button {...$$restProps} on:click>
     <slot />
 </button>
 
