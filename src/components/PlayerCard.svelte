@@ -43,7 +43,7 @@
 
     <div class="player-card-controls">
         <Button on:click="{() => deletePlayer(player.id)}">Delete</Button>
-        <Button on:click="{() => selectPlayer(player)}">Edit</Button>
+        <Button aria-controls="player-editor" on:click="{() => selectPlayer(player)}">Edit</Button>
     </div>
 </li>
 

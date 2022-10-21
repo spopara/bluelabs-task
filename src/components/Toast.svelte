@@ -21,6 +21,7 @@
     class:toast--success="{type === 'success'}"
     class:toast--error="{type === 'error'}"
     out:fade
+    aria-live="polite"
 >
     {message}
 </div>

@@ -9,7 +9,14 @@
     let editingPlayer: Player = player as Player
 </script>
 
-<dialog id="player-editor" class="player-editor" aria-modal="true" data-backdrop="static" data-keyboard="false">
+<dialog
+    id="player-editor"
+    class="player-editor"
+    aria-modal="true"
+    data-backdrop="static"
+    data-keyboard="false"
+    aria-label="Player Editor"
+>
     <h2 id="form-dialog-title">
         {player.name ? `Edit ${player.name}` : "New player"}
     </h2>

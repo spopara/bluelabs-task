@@ -28,6 +28,7 @@
         id="name"
         name="name"
         placeholder="input name"
+        autocomplete="off"
         on:change="{(e) => {
             name = e.target.value
             onUpdate({ ...data, name })

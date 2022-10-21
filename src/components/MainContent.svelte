@@ -109,7 +109,7 @@
 
 <section>
     <menu>
-        <Button on:click="{() => handleAddPlayer()}">Add</Button>
+        <Button id="add-player" aria-controls="player-editor" on:click="{() => handleAddPlayer()}">Add</Button>
     </menu>
 
     <ul>
