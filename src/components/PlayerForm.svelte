@@ -40,7 +40,7 @@
     <label for="position">Position</label>
     <select
         bind:value="{position}"
-        on:change="{(e) => {
+        on:blur="{(e) => {
             const nextPosition = toPosition(e.target.value)
             if (nextPosition) {
                 position = nextPosition
