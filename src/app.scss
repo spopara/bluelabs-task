@@ -1,0 +1,31 @@
+/***** COLORS *****/
+$colorPrimary: #2b6298;
+$colorSecondary: #ffcc74;
+$colorTextPrimary: #fff;
+$colorTextSecondary: #000;
+$colorInfo: #898989;
+$colorSuccess: #75c371;
+$colorError: #b85151;
+$colorGradientBackground: radial-gradient(circle, #0bc8af 0%, $colorPrimary 80%);
+
+/***** MARGIN *****/
+$mSm: 8px;
+$mMd: 12px;
+$mLg: 16px;
+
+/***** PADDING *****/
+$pSm: 8px;
+$pMd: 12px;
+$pLg: 16px;
+
+/***** BORDER *****/
+$brSm: 6px;
+$brMd: 12px;
+$brLg: 24px;
+
+/***** FONT *****/
+$fSm: .8rem;
+$fMd: 1rem;
+$fLg: 1.2rem;
+$fXl: 1.8rem;
+$f2x: 2rem;

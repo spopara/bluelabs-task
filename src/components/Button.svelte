@@ -3,17 +3,18 @@
 </button>
 
 <style lang="scss">
+    @import "../app.scss";
     button {
-        padding: 8px 12px;
-        background-color: #ffcc74;
-        color: #000;
+        padding: $pSm $pMd;
+        background-color: $colorSecondary;
+        color: $colorTextSecondary;
         font-weight: bold;
         border: none;
-        border-radius: 3px;
+        border-radius: $brSm;
         cursor: pointer;
     }
 
     button:hover {
-        color: #fff;
+        color: $colorTextPrimary;
     }
 </style>

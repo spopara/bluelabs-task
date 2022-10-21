@@ -133,8 +133,10 @@
 />
 
 <style lang="scss">
+    @import "../app.scss";
+
     menu {
-        padding: 10px;
+        padding: $pSm;
         display: flex;
         justify-content: end;
         align-items: center;
@@ -143,7 +145,7 @@
         width: 100%;
         ul {
             padding: 0;
-            margin: 0 0 20px 0;
+            margin: 0;
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;

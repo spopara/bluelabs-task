@@ -48,43 +48,42 @@
 </li>
 
 <style lang="scss">
-    $lightGray: #d4d4d4;
-    $cardMargin: 10px;
+    @import "../app.scss";
 
     .player-card {
         position: relative;
         box-sizing: border-box;
-        margin: $cardMargin;
+        margin: $mMd;
         width: 335px;
         height: 500px;
         flex-shrink: 0;
-        color: #fff;
-        background: #2b6298;
-        background: radial-gradient(circle, #2b6298 0%, #123053 100%);
-        border-radius: 25px;
+        color: $colorTextPrimary;
+        background: $colorPrimary;
+        background: $colorGradientBackground;
+        border-radius: $brLg;
         overflow: hidden;
 
         .player-card-info {
             box-sizing: border-box;
-            padding: 20px;
+            padding: $pLg;
             height: 206px;
 
             .player-card-title {
                 margin: 0 auto;
-                font-size: 2rem;
+                font-size: $f2x;
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
             }
 
             .player-card-subtitle {
-                margin: 0 auto $cardMargin;
-                color: $lightGray;
-                font-size: 1rem;
+                margin: 0 auto $mSm;
+                color: darken($colorTextPrimary, 20%);
+                font-size: $fMd;
             }
 
             .player-card-statistics {
-                margin-bottom: $cardMargin;
+                margin-bottom: $mSm;
                 display: grid;
                 grid-template-columns: repeat(2, 50%);
                 grid-template-rows: repeat(2, 50%);
@@ -96,11 +95,11 @@
                 }
 
                 .player-card-statistics-item--title {
-                    font-size: 1.2em;
+                    font-size: $fLg;
                 }
 
                 .player-card-statistics-item--value {
-                    font-size: 1.8em;
+                    font-size: $fXl;
                     font-weight: bold;
                 }
             }
@@ -117,7 +116,7 @@
             position: absolute;
             bottom: 0;
             box-sizing: border-box;
-            padding: 10px 20px;
+            padding: $pLg;
             width: 100%;
             display: flex;
             justify-content: space-around;

@@ -27,19 +27,18 @@
 </div>
 
 <style lang="scss">
-    $colorInfo: #898989;
-    $colorSuccess: #75c371;
-    $colorError: #b85151;
+    @import "../app.scss";
+
     .toast {
         position: fixed;
         top: 90px;
-        left: calc(50% - 150px);
+        left: calc(50% - 140px);
         box-sizing: border-box;
-        padding: 10px;
-        min-width: 300px;
-        max-width: 300px;
-        color: #fff;
-        border-radius: 15px;
+        padding: $pMd;
+        min-width: 280px;
+        max-width: 280px;
+        color: $colorTextPrimary;
+        border-radius: $brMd;
         text-align: center;
 
         &--info {

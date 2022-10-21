@@ -51,27 +51,28 @@
 </dialog>
 
 <style lang="scss">
+    @import "../app.scss";
     .player-editor {
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
-        background-color: #fff;
-        border-radius: 25px;
+        background-color: $colorTextPrimary;
+        border-radius: $brLg;
         text-align: center;
 
         &::backdrop {
-            background: #2b6298;
-            background: radial-gradient(circle, #2b6298 0%, #123053 100%);
+            background: $colorPrimary;
+            background: $colorGradientBackground;
             pointer-events: none;
         }
 
         .player-editor-form {
             position: relative;
             box-sizing: border-box;
-            padding: 10px;
+            padding: $pMd;
             margin: auto;
-            max-width: 512px;
+            max-width: 500px;
         }
     }
 </style>

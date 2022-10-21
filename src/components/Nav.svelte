@@ -1,16 +1,17 @@
 <nav>
-	<h1>Player List</h1>
+    <h1>Player List</h1>
 </nav>
 
-<style>
-	nav {
-		color: #fff;
-        background: #123053;
-		font-weight: 300;
-		padding: 1rem;
-	}
+<style lang="scss">
+    @import "../app.scss";
+
+    nav {
+        color: $colorTextPrimary;
+        background: $colorPrimary;
+        padding: $pLg;
+    }
     h1 {
-       margin: 0;
-	   white-space: nowrap;
+        margin: 0;
+        white-space: nowrap;
     }
 </style>

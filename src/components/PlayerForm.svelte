@@ -128,11 +128,12 @@
 </div>
 
 <style lang="scss">
+    @import "../app.scss";
     .player-form {
         display: grid;
         grid-template-columns: 100px auto;
-        column-gap: 10px;
-        row-gap: 10px;
+        column-gap: $mSm;
+        row-gap: $mSm;
 
         label {
             text-align: end;
