@@ -27,29 +27,34 @@
 </div>
 
 <style lang="scss">
+    $colorInfo: #898989;
+    $colorSuccess: #75c371;
+    $colorError: #b85151;
     .toast {
         position: fixed;
         top: 90px;
         left: calc(50% - 150px);
+        box-sizing: border-box;
         padding: 10px;
         min-width: 300px;
+        max-width: 300px;
         color: #fff;
         border-radius: 15px;
         text-align: center;
 
         &--info {
-            background-color: #898989;
-            border: 2px solid darken(#898989, 25%);
+            background-color: $colorInfo;
+            border: 2px solid darken($colorInfo, 25%);
         }
 
         &--success {
-            background-color: #75c371;
-            border: 2px solid darken(#75c371, 25%);
+            background-color: $colorSuccess;
+            border: 2px solid darken($colorSuccess, 25%);
         }
 
         &--error {
-            background-color: #b85151;
-            border: 2px solid darken(#b85151, 25%);
+            background-color: $colorError;
+            border: 2px solid darken($colorError, 25%);
         }
     }
 </style>
